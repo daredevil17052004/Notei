@@ -1,0 +1,28 @@
+Meeting Date: October 10, 2023
+Participants: Ansh, Devraj, Anuj, Saksham
+
+Ansh: Good morning everyone. Today, we will discuss the latest updates and best practices in React.js. Let's start with the new features introduced in React 18. Devraj, could you give us an overview?
+
+Devraj: Sure, Ansh. React 18 introduces several new features, including automatic batching, concurrent rendering, and the new startTransition API. These features aim to improve the performance and user experience of React applications.
+
+Anuj: That's interesting. Can you explain how automatic batching works?
+
+Devraj: Automatic batching allows React to group multiple state updates into a single re-render, which can significantly improve performance. Previously, React would re-render the component for each state update, but with automatic batching, it waits until all updates are done before re-rendering.
+
+Saksham: That sounds great. How about concurrent rendering? How does it benefit our applications?
+
+Devraj: Concurrent rendering allows React to work on multiple tasks simultaneously, without blocking the main thread. This means that React can prioritize urgent updates, like user interactions, over less critical updates, resulting in a smoother user experience.
+
+Ansh: Thanks for the explanation, Devraj. Let's move on to best practices. Anuj, could you share some tips on optimizing React applications?
+
+Anuj: Sure, Ansh. One important practice is to use React.memo to prevent unnecessary re-renders of functional components. Additionally, we should use the useCallback and useMemo hooks to memoize functions and values, respectively. This helps in reducing the number of re-renders and improving performance.
+
+Saksham: I've also read about code-splitting. How does it help in optimizing React applications?
+
+Anuj: Code-splitting allows us to split our code into smaller chunks, which can be loaded on demand. This reduces the initial load time of the application and improves performance. We can use React.lazy and Suspense to implement code-splitting in our applications.
+
+Ansh: Great insights, Anuj. Lastly, let's discuss testing in React. Saksham, could you share some best practices for testing React components?
+
+Saksham: Of course, Ansh. It's important to write unit tests for our components using libraries like Jest and React Testing Library. We should also write integration tests to ensure that different parts of our application work together as expected. Additionally, using tools like Storybook can help in visual testing and documentation of our components.
+
+Ansh: Thank you, everyone, for the valuable inputs. Let's continue to implement these best practices in our projects and keep ourselves updated with the latest features in React. Meeting adjourned.
