@@ -44,7 +44,7 @@ export default function Home() {
       <StarsBackground className=""/>
 
       <NavigationBar />
-      <div className="text-white h-[80vh]  flex flex-col justify-center items-center " >
+      <div className="tzext-white h-[80vh]  flex flex-col justify-center items-center " >
         <div className="h-[50rem] w-full   relative flex items-center justify-center">
           {/* Radial gradient for the container to give a faded look */}
           <div className="absolute pointer-events-none inset-0 flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>

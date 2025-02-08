@@ -9,21 +9,30 @@ import { PlaceholdersAndVanishInput } from '@/components/ui/placeholders-and-van
 import Link from 'next/link';
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
+import { AnimatedModalDemo } from '@/components/Modal'
 
 const page = async () => {
 
     const session = await auth()
 
-    const placeholders = [
-        "What's the first rule of Fight Club?",
-        "Who is Tyler Durden?",
-        "Where is Andrew Laeddis Hiding?",
-        "Write a Javascript method to reverse a string",
-        "How to assemble your own PC?",
+    console.log(session)
+
+    const emailPlaceholders = [
+        "Enter your email",
     ];
-    // const handleChange = function (e) {
-    //     console.log(e.target.value);
-    //   };
+
+    const passwordPlaceholders = [
+        "Enter your password",
+    ]
+
+    const linkPlaceholders = [
+        "Enter the link",   
+    ]
+
+    
+    const handleChange = function (e) {
+        console.log(e.target.value);
+      };
 
     //   const onSubmit = function (e) {
     //     e.preventDefault();
@@ -49,28 +58,60 @@ const page = async () => {
                     </div>
                 </div>
 
+                <div className='flex justify-between items-center'>
+                    <div className='flex flex-col items-start  justify-between h-[420px] py-10'>
 
-                <div className='flex items-center justify-between pt-40'>
+                        <div className=''>
+                            <div>
+                                <p className='text-3xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 '>Let's get started</p>
+                            </div>
+                        </div>
 
-                    <div className=''>
-                        <div>
-                            <p className='text-3xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 '>Let's get started</p>
+                        {/* <div className="flex flex-col justify-center items-center ">
+                            <PlaceholdersAndVanishInput
+                                placeholders={emailPlaceholders}
+                            onChange={handleChange}
+                            // onSubmit={onSubmit}
+                            />
+                        </div>
+
+                        <div className="flex flex-col justify-center items-center ">
+                            <PlaceholdersAndVanishInput
+                                placeholders={passwordPlaceholders}
+                            // onChange={handleChange}
+                            // onSubmit={onSubmit}
+                            />
+                        </div>
+                        <div className="flex flex-col justify-center items-center ">
+                            <PlaceholdersAndVanishInput
+                                placeholders={linkPlaceholders}
+                            onChange={handleChange}
+                            // onSubmit={onSubmit}
+                            />
+                        </div> */}
+
+                        <AnimatedModalDemo/>
+                       
+                        <div className='relative'>
+                            <Link href='/'>
+                                <Button>Submit the Link.</Button>
+                            </Link>
                         </div>
                     </div>
 
-                    <div className="flex flex-col justify-center items-center px-4 ">
-                        <PlaceholdersAndVanishInput
-                            placeholders={placeholders}
-                        // onChange={handleChange}
-                        // onSubmit={onSubmit}
+                    {/* Mascot */}
+                    <div>
+                        <video
+                        className="w-[600px] h-96"
+                        src="/mascot2.mp4" // Place mascot.mp4 in public folder
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
                         />
                     </div>
 
-                    <div className='relative'>
-                        <Link href='/'>
-                            <Button>Submit the Link.</Button>
-                        </Link>
-                    </div>
+
                 </div>
 
 

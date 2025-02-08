@@ -21,7 +21,7 @@ const NavigationBar = async () => {
     console.log(session)
     return (
         <div className=" w-full flex justify-around h-24 items-center bg-myBackground bg-opacity-30 border-b-[1px] border-myAccent/20 ">
-            {/* <div>
+            <div>
                 <div>
                     <Image src='/Note-i.png' height={70} width={90} className=""/>
                 </div>
@@ -41,7 +41,7 @@ const NavigationBar = async () => {
                         <Button variant="ghost" className="bg-myAccent/70 text-white">Get Started</Button>
                     </Link>
                 )}
-            </div> */}
+            </div>
         </div>
     );
 };
