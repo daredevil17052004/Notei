@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const fs = require('fs');
-const { GoogleGenerativeAI } = require("@google/generative-ai")
+const { MongoClient } = require('mongodb');
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const app = express();
 const port = process.env.PORT || 5555;
 
@@ -18,12 +18,39 @@ app.use(cors());
 app.use(bodyParser.json());
 dotenv.config();
 
-// const apiKey = 'AIzaSyCYVzxjMCXmoJLddnCqphWgr27k2Md7i34';
-const apiKey = process.env.API_KEY;
+// MongoDB connection
+// const mongoUri = ;                   **********************
+if (!mongoUri) {
+  logger("MONGO_URI is not set");
+  process.exit(1);
+}
+
+const client = new MongoClient(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// const apiKey = ;                   **********************
 if (!apiKey) {
   logger("API_KEY is not set");
   process.exit(1);
 }
+
+let meetingData = null;
+
+const fetchMeetingData = async () => {
+  try {
+    await client.connect();
+    const database = client.db('meeting');
+    const collection = database.collection('notes');
+    meetingData = await collection.findOne({}); // Adjust the query as needed
+    logger("Meeting data fetched successfully", meetingData);
+  } catch (error) {
+    logger(`Error fetching meeting data: ${error.message}`);
+  } finally {
+    await client.close();
+  }
+};
+
+// Fetch meeting data once when the server starts
+fetchMeetingData();
 
 app.post("/api/transcript", async (req, res) => {
   logger("Received request for /api/transcript");
@@ -37,10 +64,14 @@ app.post("/api/transcript", async (req, res) => {
     return res.status(400).send({ error: "Prompt is required" });
   }
 
-  const meetingData = fs.existsSync("meetdata.txt") ? fs.readFileSync("meetdata.txt", "utf-8") : "";
-  const finalprompt = `Meeting conversation data \n ${meetingData}\n end of meet conversation \n\n User's queries about meeting: ${prompt}`;
+  if (!meetingData) {
+    logger("Meeting data is not available");
+    return res.status(500).send({ error: "Meeting data is not available" });
+  }
 
   try {
+    const finalprompt = `Meeting conversation data: \n${meetingData.conversation}\nMeeting URL: ${meetingData.url}\nEnd of meeting conversation.\n\nUser's queries about meeting: ${prompt}`;
+
     logger("Generating content with the model");
     const result = await model.generateContent([finalprompt]);
     logger("Content generated successfully");
