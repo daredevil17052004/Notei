@@ -10,7 +10,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import subprocess
 import time
-import pyaudio
+import sounddevice as sd
+import numpy as np
 import wave
 import threading
 from datetime import datetime
@@ -35,31 +36,47 @@ def transcribe_audio_with_whisper(audio_file_path, transcription_file_path):
     except Exception as e:
         print(f"Error running Whisper transcription: {e}")
 
-def record_audio(output_file, duration):
+# def record_audio(output_file, duration):
     
-    CHUNK = 1024
-    FORMAT = pyaudio.paInt16
-    CHANNELS = 1
-    RATE = 16000
+#     CHUNK = 1024
+#     FORMAT = pyaudio.paInt16
+#     CHANNELS = 1
+#     RATE = 16000
 
-    audio = pyaudio.PyAudio()
-    stream = audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
+#     audio = pyaudio.PyAudio()
+#     stream = audio.open(format=FORMAT, channels=CHANNELS, rate=RATE, input=True, frames_per_buffer=CHUNK)
 
-    frames = []
+#     frames = []
 
-    for _ in range(0, int(RATE / CHUNK * duration)):
-        data = stream.read(CHUNK)
-        frames.append(data)
+#     for _ in range(0, int(RATE / CHUNK * duration)):
+#         data = stream.read(CHUNK)
+#         frames.append(data)
 
-    stream.stop_stream()
-    stream.close()
-    audio.terminate()
+#     stream.stop_stream()
+#     stream.close()
+#     audio.terminate()
 
+#     with wave.open(output_file, 'wb') as wf:
+#         wf.setnchannels(CHANNELS)
+#         wf.setsampwidth(audio.get_sample_size(FORMAT))
+#         wf.setframerate(RATE)
+#         wf.writeframes(b''.join(frames))
+
+def record_audio(output_file, duration):
+    SAMPLE_RATE = 16000  # Sample rate
+    CHANNELS = 1  # Mono audio
+
+    print(f"Recording started for {duration} seconds...")
+    audio_data = sd.rec(int(duration * SAMPLE_RATE), samplerate=SAMPLE_RATE, channels=CHANNELS, dtype=np.int16)
+    sd.wait()  # Wait for recording to finish
+    print("Recording finished.")
+
+    # Save recorded data to a WAV file
     with wave.open(output_file, 'wb') as wf:
         wf.setnchannels(CHANNELS)
-        wf.setsampwidth(audio.get_sample_size(FORMAT))
-        wf.setframerate(RATE)
-        wf.writeframes(b''.join(frames))
+        wf.setsampwidth(2)  # 16-bit audio
+        wf.setframerate(SAMPLE_RATE)
+        wf.writeframes(audio_data.tobytes())
 
 def join_google_meet(meeting_url, recording_duration=30):
     
