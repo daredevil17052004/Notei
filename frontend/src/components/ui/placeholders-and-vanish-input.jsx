@@ -8,7 +8,9 @@ import { BackgroundGradient } from "./background-gradient";
 export function PlaceholdersAndVanishInput({
   placeholders,
   onChange,
-  onSubmit
+  onSubmit,
+  name,
+  id
 }) {
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
 
@@ -183,6 +185,8 @@ export function PlaceholdersAndVanishInput({
         ref={canvasRef} />
 
           <input
+            name={name}
+            id={id}
             onChange={(e) => {
               if (!animating) {
                 setValue(e.target.value);

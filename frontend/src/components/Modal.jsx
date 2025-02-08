@@ -7,20 +7,42 @@ import {
   ModalFooter,
   ModalTrigger,
 } from "../components/ui/animated-modal";
-import Image from "next/image";
-import { motion } from "framer-motion";
 import { PlaceholdersAndVanishInput } from "./ui/placeholders-and-vanish-input";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export function AnimatedModalDemo() {
 
+  const router = useRouter();
 
-  const emailPlaceholders = [
-    "Enter your email",
-  ];
 
-  const passwordPlaceholders = [
-    "Enter your password",
-  ]
+  async function handleSubmit(e, router,link) {
+    e.preventDefault();
+    try {
+      // const formData = new FormData(e.currentTarget);
+      // console.log(formData)
+      // const link = formData.get("link")
+
+      const acquiredLink = link.value
+      const res = await axios.post('http://localhost:3000/api/meet', { acquiredLink }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      console.log('THE RESULT IS HERE', res.status)
+
+      if (res.status == 201) {
+        router.push('/login')
+      }
+
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
+
+
+
 
   const linkPlaceholders = [
     "Enter the link",
@@ -34,14 +56,14 @@ export function AnimatedModalDemo() {
     (<div className="py-40  flex items-center justify-center">
       <Modal>
         <ModalTrigger
-          className="bg-black dark:bg-white dark:text-black text-white flex justify-center group/modal-btn">
+          className="bg-myAccent/60  text-white flex justify-center group/modal-btn">
           <span
             className="group-hover/modal-btn:translate-x-40 text-center transition duration-500">
-            Book your flight
+            Start with Us
           </span>
           <div
             className="-translate-x-40 group-hover/modal-btn:translate-x-0 flex items-center justify-center absolute inset-0 transition duration-500 text-white z-20">
-            ✈️
+            Let's goooo
           </div>
         </ModalTrigger>
         <ModalBody className="p-10 bg-gradient-to-b from-neutral-900 to-neutral-800 shadow-3xl shadow-black text-white rounded bg-blur-image">
@@ -56,43 +78,26 @@ export function AnimatedModalDemo() {
               now!
             </h4>
             <div className="">
-              <div className=" flex flex-col justify-between h-40">
-                <div className="flex flex-col justify-center items-center ">
-                  <PlaceholdersAndVanishInput
-                    placeholders={emailPlaceholders}
-                    onChange={handleChange}
-                  // onSubmit={onSubmit}
-                  />
+              <form onSubmit={(e) => handleSubmit(e, router, link)} >
+                <div className=" flex flex-col justify-between h-24">
+                  <div className="flex flex-col justify-center items-center ">
+                    <PlaceholdersAndVanishInput
+                      placeholders={linkPlaceholders}
+                      onChange={handleChange}
+                      name={"link"}
+                      id={"link"}
+                    />
+                  </div>
                 </div>
-
-                <div className="flex flex-col justify-center items-center ">
-                  <PlaceholdersAndVanishInput
-                    placeholders={passwordPlaceholders}
-                  // onChange={handleChange}
-                  // onSubmit={onSubmit}
-                  />
-                </div>
-                <div className="flex flex-col justify-center items-center ">
-                  <PlaceholdersAndVanishInput
-                    placeholders={linkPlaceholders}
-                    onChange={handleChange}
-                  // onSubmit={onSubmit}
-                  />
-                </div>
-              </div>
-
+                  <button
+                    type="submit"
+                    className="bg-myAccent text-sm px-2 py-1 rounded-md border border-black w-28 mx-4">
+                    Submit
+                  </button>
+              </form>
             </div>
           </ModalContent>
-          <ModalFooter className=" bg-transparent">
-            {/* <button
-              className="px-2 py-1  rounded-md text-sm w-28">
-              Cancel
-            </button> */}
-            <button
-              className="bg-myAccent text-sm px-2 py-1 rounded-md border border-black w-28 mx-4">
-                Submit
-            </button>
-          </ModalFooter>
+
         </ModalBody>
       </Modal>
     </div>)
