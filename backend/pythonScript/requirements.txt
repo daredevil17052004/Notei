@@ -4,4 +4,5 @@ selenium==4.27.1
 undetected-chromedriver==3.5.5
 pyaudio==0.2.14
 wave
+pipwin
 webdriver-manager==4.0.2
