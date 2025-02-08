@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: notei
+    env: python
+    plan: free
+    pythonVersion: 3.11
+    buildCommand: |
+      apt-get update && apt-get install -y libasound-dev libportaudio2 portaudio19-dev
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health  # Change or remove if unnecessary
