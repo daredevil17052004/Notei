@@ -160,3 +160,7 @@ def start_meeting(request: MeetingRequest):
         request.meeting_url, request.recording_duration)).start()
     
     return {"message": "Meeting started", "meeting_url": request.meeting_url}
+
+@app.get("/")
+def home():
+    return {"message": "Welcome to NoteAI Google Meet Bot API!"}
