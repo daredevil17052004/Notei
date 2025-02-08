@@ -2,7 +2,6 @@ fastapi==0.115.8
 uvicorn==0.34.0
 selenium==4.27.1
 undetected-chromedriver==3.5.5
-pyaudio==0.2.14
+pyaudio @ https://github.com/jleb/pyaudio/releases/download/0.2.11/pyaudio-0.2.11-cp311-cp311-manylinux2014_x86_64.whl
 wave
-pipwin
 webdriver-manager==4.0.2
