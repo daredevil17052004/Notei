@@ -16,12 +16,12 @@ In today’s fast-paced world, keeping track of everything can be overwhelming. 
 
 ## **Are you solving a real-world problem?** (Yes)  
 ### 🚨 **The Problem**  
-In today’s **fast-paced world**, keeping track of important discussions can be a **daunting task**. 📅📝 Countless valuable insights are **lost** due to unorganized notes, scattered information, and lack of an efficient recall system. Without a **structured approach**, remembering key takeaways from past meetings becomes a struggle, leading to **missed opportunities and reduced productivity**. ⚡❌  
+In today’s **fast-paced world**, keeping track of important discussions can be a **daunting task**. 📅📝 Countless valuable insights are **lost** due to unorganized notes, scattered information, and lack of an efficient recall system. Without a **structured approach**, remembering key takeaways from past meetings becomes a struggle, leading to **missed opportunities and reduced productivity**. ⚡  
 
 ### 🌟 **The Solution – Meet Note-i !**  
 Introducing **Note-i** – your **AI-powered virtual assistant** that revolutionizes **meeting management**! 🚀🤖  
 
-✅ **Humanized Interaction** – Interact with the virtual bot as like you interact with human. 🗣️🤝  
+✅ **Humanized Interaction** – Interact with the virtual bot as you with human. 🗣️🤝  
 ✅ **Real-time Note-Taking** – No need to scribble notes; Note-i captures every important detail **effortlessly**! ✍️📄  
 ✅ **Instant Meeting Recaps** – Forgot what was discussed? Just ask, and Note-i will summarize **your last meeting**! 🔄🎙️ 
 
