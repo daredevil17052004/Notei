@@ -92,11 +92,6 @@ const page = async () => {
 
                         <AnimatedModalDemo/>
                        
-                        <div className='relative'>
-                            <Link href='/'>
-                                <Button>Submit the Link.</Button>
-                            </Link>
-                        </div>
                     </div>
 
                     {/* Mascot */}
