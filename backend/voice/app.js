@@ -29,7 +29,7 @@ app.post('/api/transcript', async (req, res) => {
     }
     const meetingData = fs.existsSync('meetdata.txt') ? fs.readFileSync('meetdata.txt', 'utf-8') : '';
 
-    const finalprompt = `Meeting conversation data \n ${meetingData}\n end of meet conversation \n\n User's queries about meeting: ${prompt} \n Please write short, clear and conscise answers without using any symbols and avoid markdown`;
+    const finalprompt = `Meeting conversation data \n ${meetingData}\n end of meet conversation \n\n User's queries about meeting: ${prompt} `;
     
     try {
         const result = await model.generateContent([finalprompt]);
